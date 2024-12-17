@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "20241216_AbschlussProjekt_SEGL_Lauer_EchoesOfFortune/1.0.0": {
+        "runtime": {
+          "20241216_AbschlussProjekt_SEGL_Lauer_EchoesOfFortune.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "20241216_AbschlussProjekt_SEGL_Lauer_EchoesOfFortune/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
