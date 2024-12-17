@@ -11,17 +11,23 @@ namespace _20241216_AbschlussProjekt_SEGL_Lauer_EchoesOfFortune
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("*** Willkommen beim Spiel ECHOES OF FORTUNE ***");
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Dein spannendes 2D-Konsolen-Schatzsuche-Abenteuer.");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Anleitung:");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Als Spieler hast das P-Symbol auf dem Spielfeld.\nDu musst den Schatz mit dem $-Symbol finden ohne\ndabei in eine Falle zu tappen. Bewege dein\nP-Symbol mit den folgenden Tasten: w = nach oben,\na = nach links, s = nach unten, d = nach rechts.\nErreichst du den Schatz mit dem $-Symbol ohne in\neine Falle zu tappen hast du das Spiel gewonnen.\nWenn du in eine Falle tappst hast du das Spiel\nverloren.");
+            Console.WriteLine("Als Spieler hast du das P-Symbol auf dem Spielfeld.\nDu musst den Schatz mit dem $-Symbol finden ohne\ndabei in eine Falle zu tappen. Bewege dein\nP-Symbol mit den folgenden Tasten: W = nach oben,\nA = nach links, S = nach unten, D = nach rechts.\nErreichst du den Schatz mit dem $-Symbol ohne in\neine Falle zu tappen hast du das Spiel gewonnen.\nWenn du in eine Falle tappst hast du das Spiel\nleider verloren.");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine();
             Console.WriteLine("Dein Schatzsuche-Abenteuer beginnt jetzt. Los geht's!");
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Zum Spielen ENTER drücken!");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("*** Copyright: 2024 Tobias Lauer ***");
             Console.ResetColor();
 
             Einzelfeld[,] spielfeld = new Einzelfeld[10, 10];
@@ -64,22 +70,20 @@ namespace _20241216_AbschlussProjekt_SEGL_Lauer_EchoesOfFortune
             spielfeld[schatzY, schatzX].HatSchatz = true;
             spielfeld[schatzY, schatzX].AktualisiereFeld();
 
-            for (int i = 0; i < 25; i++)
+            for (int i = 0; i < 20; i++)
             {
+                int falleX, falleY;
 
-            }
+                do
+                {
+                    falleX = zufall.Next(0, 10);
+                    falleY = zufall.Next(0, 10);
 
-            int falleX, falleY;
+                } while ((falleX == spielerX && falleY == spielerY) || (falleX == schatzX && falleY == schatzY) || spielfeld[falleY, falleX].HatFalle);
 
-            do
-            {
-                falleX = zufall.Next(0, 10);
-                falleY = zufall.Next(0, 10);
-
-            } while ((falleX == spielerX && falleY == spielerY) || (falleX == schatzX && falleY == schatzY) || spielfeld[falleY, falleX].HatFalle);
-
-            spielfeld[falleY, falleX].HatFalle = true;
-            spielfeld[falleY, falleX].AktualisiereFeld();
+                spielfeld[falleY, falleX].HatFalle = true;
+                spielfeld[falleY, falleX].AktualisiereFeld();
+            }            
         
             Console.WriteLine();
             Console.ResetColor();
@@ -88,6 +92,8 @@ namespace _20241216_AbschlussProjekt_SEGL_Lauer_EchoesOfFortune
             ZeichneSpielfeld(spielfeld);
 
             Spielen(spielfeld, ref spielerX, ref spielerY);
+
+
         }
 
         static void ZeichneSpielfeld(Einzelfeld[,] spielfeld)
@@ -96,10 +102,13 @@ namespace _20241216_AbschlussProjekt_SEGL_Lauer_EchoesOfFortune
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\r\n   _    _____     _                              __   _____          _                       _  \r\n  | |  | ____|___| |__   ___   ___  ___    ___  / _| |  ___|__  _ __| |_ _   _ _ __   ___   | | \r\n / __) |  _| / __| '_ \\ / _ \\ / _ \\/ __|  / _ \\| |_  | |_ / _ \\| '__| __| | | | '_ \\ / _ \\ / __)\r\n \\__ \\ | |__| (__| | | | (_) |  __/\\__ \\ | (_) |  _| |  _| (_) | |  | |_| |_| | | | |  __/ \\__ \\\r\n (   / |_____\\___|_| |_|\\___/ \\___||___/  \\___/|_|   |_|  \\___/|_|   \\__|\\__,_|_| |_|\\___| (   /\r\n  |_|                                                                                       |_| \r\n");
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("*** Willkommen beim Spiel ECHOES OF FORTUNE ***");
+            Console.WriteLine("*** ECHOES OF FORTUNE - Dein spannendes 2D-Konsolen-Schatzsuche-Abenteuer. ***");
             Console.WriteLine();
-            Console.WriteLine("Dein spannendes 2D-Konsolen-Schatzsuche-Abenteuer.");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Das Spiel läuft jetzt. Viel Erfolg!");
             Console.WriteLine();
+            
+            Console.ForegroundColor = ConsoleColor.White;
 
             for (int y = 0; y < 10; y++)
             {
@@ -109,6 +118,19 @@ namespace _20241216_AbschlussProjekt_SEGL_Lauer_EchoesOfFortune
                 }
                 Console.WriteLine();
             }
+
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("So bewegst du dich auf dem Spielfeld:");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("W = nach oben, A = nach links, S = nach unten, D = nach rechts.");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("*** Copyright: 2024 Tobias Lauer ***");
+            Console.ResetColor();
+
         }
         static void Spielen(Einzelfeld[,] spielfeld, ref int spielerX, ref int spielerY)
         {
@@ -136,22 +158,72 @@ namespace _20241216_AbschlussProjekt_SEGL_Lauer_EchoesOfFortune
                     case ConsoleKey.D:
                     neuerX = Math.Min(9, spielerX + 1);
                     break;
-
+                    
                     default:
                     Console.WriteLine("Ungültige Taste. Bitte w, a, s, d benutzen.");
                     continue;
                     }
 
+                    Console.Clear();
+
                     if (spielfeld[neuerY, neuerX].HatFalle)
                     {
-                        Console.WriteLine("Du bist in eine Falle getappt. Du hast leider verloren.");
-                        break;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("\r\n   _    _____     _                              __   _____          _                       _  \r\n  | |  | ____|___| |__   ___   ___  ___    ___  / _| |  ___|__  _ __| |_ _   _ _ __   ___   | | \r\n / __) |  _| / __| '_ \\ / _ \\ / _ \\/ __|  / _ \\| |_  | |_ / _ \\| '__| __| | | | '_ \\ / _ \\ / __)\r\n \\__ \\ | |__| (__| | | | (_) |  __/\\__ \\ | (_) |  _| |  _| (_) | |  | |_| |_| | | | |  __/ \\__ \\\r\n (   / |_____\\___|_| |_|\\___/ \\___||___/  \\___/|_|   |_|  \\___/|_|   \\__|\\__,_|_| |_|\\___| (   /\r\n  |_|                                                                                       |_| \r\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("*** ECHOES OF FORTUNE - Dein spannendes 2D-Konsolen-Schatzsuche-Abenteuer. ***");                                       
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\r\n    ______                   __                         ______\r\n   / / / /  _   _____  _____/ /___  ________  ____     / / / /\r\n  / / / /  | | / / _ \\/ ___/ / __ \\/ ___/ _ \\/ __ \\   / / / / \r\n /_/_/_/   | |/ /  __/ /  / / /_/ / /  /  __/ / / /  /_/_/_/  \r\n(_|_|_)    |___/\\___/_/  /_/\\____/_/   \\___/_/ /_/  (_|_|_)   \r\n                                                              \r\n");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("******************************************************************************");
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Du bist in eine Falle getappt und hast das Spiel leider verloren!");                    
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Möchtest du es erneut versuchen?");
+                    Console.WriteLine();                    
+                    Console.WriteLine("Drücke jetzt J = neues Spiel oder N = Spiel beenden.");
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("******************************************************************************");
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("*** Copyright: 2024 Tobias Lauer ***");
+                    Console.ReadKey();
+                    Console.ResetColor();
+                    break;
                     }
 
                     if (spielfeld[neuerY, neuerX].HatSchatz)
                     {
-                        Console.WriteLine("Gratulation, du hast den wertvollen Schatz gefunden. Du hast das Spiel gewonnen.");
-                        break;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("\r\n   _    _____     _                              __   _____          _                       _  \r\n  | |  | ____|___| |__   ___   ___  ___    ___  / _| |  ___|__  _ __| |_ _   _ _ __   ___   | | \r\n / __) |  _| / __| '_ \\ / _ \\ / _ \\/ __|  / _ \\| |_  | |_ / _ \\| '__| __| | | | '_ \\ / _ \\ / __)\r\n \\__ \\ | |__| (__| | | | (_) |  __/\\__ \\ | (_) |  _| |  _| (_) | |  | |_| |_| | | | |  __/ \\__ \\\r\n (   / |_____\\___|_| |_|\\___/ \\___||___/  \\___/|_|   |_|  \\___/|_|   \\__|\\__,_|_| |_|\\___| (   /\r\n  |_|                                                                                       |_| \r\n");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("*** ECHOES OF FORTUNE - Dein spannendes 2D-Konsolen-Schatzsuche-Abenteuer. ***");                    
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("\r\n     __  __  __                                                        __   __   __ \r\n   _/ /_/ /_/ /   ____ ____ _      ______  ____  ____  ___  ____     _/ _)_/ _)_/ _)\r\n  / __/ __/ __/  / __ `/ _ \\ | /| / / __ \\/ __ \\/ __ \\/ _ \\/ __ \\   / | |/ | |/ | | \r\n (_  |_  |_  )  / /_/ /  __/ |/ |/ / /_/ / / / / / / /  __/ / / /  | || | || | || | \r\n/  _/  _/  _/   \\__, /\\___/|__/|__/\\____/_/ /_/_/ /_/\\___/_/ /_/   | |_/| |_/| |_/  \r\n/_/ /_/ /_/    /____/                                             (__/ (__/ (__/    \r\n");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("******************************************************************************");
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Gratulation! Du hast den wertvollen Schatz gefunden und das Spiel gewonnen!");
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Möchtest du es erneut versuchen?");
+                    Console.WriteLine();                    
+                    Console.WriteLine("Drücke jetzt J = neues Spiel oder N = Spiel beenden.");
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("******************************************************************************");
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("*** Copyright: 2024 Tobias Lauer ***");
+                    Console.ReadKey();
+                    Console.ResetColor();
+                    break;
                     }
 
                     spielfeld[spielerY, spielerX].HatSpieler = false;
@@ -164,32 +236,7 @@ namespace _20241216_AbschlussProjekt_SEGL_Lauer_EchoesOfFortune
 
                     ZeichneSpielfeld(spielfeld);
                 }
-            
-
-            
-
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("So bewegst du dich auf dem Spielfeld:");
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("w = nach oben, a = nach links, s = nach unten, d = nach rechts.");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("*** Copyright: 2024 Tobias Lauer ***");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
+           
         }
     }
 }

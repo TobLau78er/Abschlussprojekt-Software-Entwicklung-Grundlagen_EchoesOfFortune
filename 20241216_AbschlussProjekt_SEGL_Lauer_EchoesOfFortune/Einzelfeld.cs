@@ -23,6 +23,7 @@ namespace _20241216_AbschlussProjekt_SEGL_Lauer_EchoesOfFortune
         {
             if (HatSpieler)
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Symbol = "P";
             }
             else if (HatSchatz)
